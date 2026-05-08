@@ -7,16 +7,16 @@ export default function About() {
   return (
     <Container className="pb-12 sm:pb-24">
       <motion.section
-        // Initial state: hidden and slightly pushed down
+        // initial state: invisible and pushed down 20 pixels
         initial={{ opacity: 0, y: 20 }}
-        // when it enters the viewport: fade in and slide up
+        // whileInView: animates to visible and original position when scrolled to
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.5, ease: "easeOut" }}
-        // viewport settings: 'once: true' means it only animates the first time you scroll to it
-        // 'margin: "-100px"' means it triggers slightly before it hits the center of the screen
+        // viewport settings: only animate once, and trigger slightly before it hits the center
         viewport={{ once: true, margin: "-100px" }}
+        className="space-y-4"
       >
-        <h2 className="text-xl sm:text-2xl font-bold tracking-tight mb-4">
+        <h2 className="text-xl sm:text-2xl font-bold tracking-tight text-foreground">
           About
         </h2>
         
