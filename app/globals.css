@@ -1,23 +1,37 @@
 @import "tailwindcss";
 
+/* 1. Force Tailwind v4 to look for manual HTML classes instead of system preference */
+@custom-variant dark (&:where(.dark, .dark *));
+
 @theme {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
 }
 
+/* 2. Light Mode Settings (when .dark class is absent) */
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --grid-color: rgba(0, 0, 0, 0.04);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* 3. Dark Mode Settings (when .dark class is present) */
+.dark {
+  --background: #0a0a0a;
+  --foreground: #ededed;
+  --grid-color: rgba(255, 255, 255, 0.03);
 }
 
 body {
   color: var(--foreground);
-  background: var(--background);
+  background-color: var(--background);
+  
+  /* Smooth transition effect when swapping themes */
+  transition: background-color 0.25s ease, color 0.25s ease;
+  
+  /* Background grid dynamically shifts opacity depending on the active mode */
+  background-image: 
+    linear-gradient(var(--grid-color) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+  background-size: 64px 64px;
 }
